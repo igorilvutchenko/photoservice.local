@@ -39,15 +39,14 @@ class ImageUploadController extends Controller
     public function store(Request $request)
     {
         $imagename = null;
-        $files = $request->file('image');
-        if (count($files) > 10) {
+        $images = $request->file('image');
+        if (count($images) > 10) {
             return back()->with('error','To mutch!'); 
         }
 
         else {
 
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:2|max:250',
                 'image.*' => 'nullable|image|mimes:jpeg,png|max:10000|dimensions:max_width=3000,max_height=2000'
             ]);
 
@@ -58,10 +57,25 @@ class ImageUploadController extends Controller
           return back()->withInput()->withErrors($validator);
         } else {
 
-        $files - new Image;
+        $image = new Image;
 
-        $files -> image = $filename;
-        return back()->with('success', 'Статья успешно добавлена');
+        foreach ($images as $image) {
+            
+
+        if($image)
+            {
+                $imagename = $image->store('public/' . 1 . 'images');
+                $imagename = substr($imagename, strripos($imagename, '/')+1);
+            }
+
+            $image->user_id = 1;
+            $image->image = $imagename;
+            $image->save();
+
+        }
+
+
+        return view('users.layout_select');
 
 
         /*echo '<pre>';
