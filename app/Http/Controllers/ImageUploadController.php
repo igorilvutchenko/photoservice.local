@@ -50,6 +50,7 @@ class ImageUploadController extends Controller
 
 
         $images = $request->file('image');
+          
         if (count($images) > 10) {
             return back()->with('error','To mutch!'); 
         }
@@ -94,8 +95,9 @@ class ImageUploadController extends Controller
         echo '</pre>';*/
 
 
+            }
         }
-      }
+        
       exit;
     }
 
