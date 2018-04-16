@@ -13,3 +13,6 @@
 
 Route::get('/', 'ImageUploadController@index');
 Route::post('/', 'ImageUploadController@store');
+Auth::routes();
+Route::auth();
+Route::get('/home', 'HomeController@index')->name('home');

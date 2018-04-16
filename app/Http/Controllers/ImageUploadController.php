@@ -57,14 +57,14 @@ class ImageUploadController extends Controller
           return back()->withInput()->withErrors($validator);
         } else {
 
-        $image = new Image;
 
-        foreach ($images as $image) {
+        foreach ($images as $file) {
+        $image = new \App\Image;
             
 
-        if($image)
+        if($file)
             {
-                $imagename = $image->store('public/' . 1 . 'images');
+                $imagename = $file->store('public/' . 1 . '/images');
                 $imagename = substr($imagename, strripos($imagename, '/')+1);
             }
 
