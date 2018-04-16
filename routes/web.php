@@ -15,4 +15,4 @@ Route::get('/upload', 'ImageUploadController@index');
 Route::post('/upload', 'ImageUploadController@store');
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('');
+Route::get('/', 'HomeController@index');

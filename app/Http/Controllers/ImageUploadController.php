@@ -39,11 +39,11 @@ class ImageUploadController extends Controller
     public function store(Request $request)
     {
         $imagename = null;
+
         $images = $request->file('image');
         if (count($images) > 10) {
             return back()->with('error','To mutch!'); 
         }
-
         else {
 
             $validator = Validator::make($request->all(), [
@@ -59,23 +59,25 @@ class ImageUploadController extends Controller
 
 
         foreach ($images as $file) {
-        $image = new \App\Image;
+        /*$image = new \App\Image;
+        $user = User::find($id);
+        $user->id = request->inpit('id');*/
             
 
         if($file)
+            $image->user_id;
             {
-                $imagename = $file->store('public/' . 1 . '/images');
+                $imagename = $file->store('public/'. 1 . '/images');
                 $imagename = substr($imagename, strripos($imagename, '/')+1);
             }
 
-            $image->user_id = 1;
             $image->image = $imagename;
             $image->save();
 
         }
 
 
-        return view('users.layout_select');
+        return redirect('users.layout_select');
 
 
         /*echo '<pre>';
