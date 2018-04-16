@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Image;
+use User;
 
 class ImageUploadController extends Controller
 {
@@ -17,7 +18,7 @@ class ImageUploadController extends Controller
     {
 
         // $images = Image::latest();
-        return view('users.upload');
+        // return view('users.upload');
     }
 
     /**
@@ -38,7 +39,15 @@ class ImageUploadController extends Controller
      */
     public function store(Request $request)
     {
+        /*echo '<pre>';
+        return($user_id);
+        echo '</pre>';
+        return;*/
+        $user = \Auth::user();
+        $user_id = $user->id;
+        
         $imagename = null;
+
 
         $images = $request->file('image');
         if (count($images) > 10) {
@@ -59,25 +68,25 @@ class ImageUploadController extends Controller
 
 
         foreach ($images as $file) {
-        /*$image = new \App\Image;
-        $user = User::find($id);
-        $user->id = request->inpit('id');*/
-            
+        $image = new \App\Image;
+        // $user_id = User::find($id);
+        // $user->id = request->input('id');
+
 
         if($file)
-            $image->user_id;
             {
-                $imagename = $file->store('public/'. 1 . '/images');
+                $imagename = $file->store('public/'. $user_id . '/images');
                 $imagename = substr($imagename, strripos($imagename, '/')+1);
             }
 
+            $image->user_id = $user_id;
             $image->image = $imagename;
             $image->save();
 
         }
 
 
-        return redirect('users.layout_select');
+        return redirect('layout_select');
 
 
         /*echo '<pre>';
