@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use User;
 use Image;
+use Layout;
 
 class LayoutSelectController extends Controller
 {
@@ -15,7 +16,10 @@ class LayoutSelectController extends Controller
      */
     public function index()
     {
-        return view('users.layout_select');
+        $layouts = Layout::latest();
+        return view('users.layout_select', [
+            'layouts' => $layouts
+        ]);
 
                 
     }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Image;
 use User;
+use Layout;
 
 class ImageUploadController extends Controller
 {
@@ -87,7 +88,14 @@ class ImageUploadController extends Controller
         }
 
 
-        return redirect('layout_select');
+
+        $layouts = Layout::getAll();
+        return view('users.layout_select', [
+            'layouts' => $layouts,
+            'images' => $images
+        ]);
+
+        // return view('users.layout_select');
 
 
         /*echo '<pre>';

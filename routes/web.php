@@ -14,6 +14,7 @@
 Route::resource('user', 'ImageUploadController@store');
 Route::get('/upload', 'ImageUploadController@store');
 Route::post('/layout_select', 'ImageUploadController@store');
+Route::get('/layout_select', 'LayoutSelectController@index');
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
