@@ -23,6 +23,6 @@ class LayoutConstructController extends Controller
     	echo '</pre>';
     	exit;
 */
-    	return view('users.layout_config');
+    	return view('users.layout_config ');
     }
 }
