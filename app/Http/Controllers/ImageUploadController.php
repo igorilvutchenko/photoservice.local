@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use Image;
-use User;
-use Layout;
+use App\Image;
+use App\User;
+use App\Layout;
 
 class ImageUploadController extends Controller
 {
@@ -89,7 +89,16 @@ class ImageUploadController extends Controller
 
 
 
-        $layouts = Layout::getAll();
+        $layouts = \App\Layout::get();
+
+
+            
+        // $layouts = $layouts->toArray();
+
+        /*echo '<pre>';
+        var_dump($layouts);
+        echo '</pre>';
+        return;*/
         return view('users.layout_select', [
             'layouts' => $layouts,
             'images' => $images

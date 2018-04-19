@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-			<form method="POST" action="{{ url('/layout_select') }}" enctype="multipart/form-data">
+			<form method="POST" action="{{ url('/layout_select/') }}" enctype="multipart/form-data">
 			@csrf
 			  <div class="form-group row">
 			    <label for="upload" class="col-md-4 col-form-label">Загрузите изоражения (Макс. 10)</label>

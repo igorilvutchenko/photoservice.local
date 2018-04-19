@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use User;
-use Image;
-use Layout;
+use App\User;
+use App\Image;
+use App\Layout;
 
 class LayoutSelectController extends Controller
 {
@@ -14,11 +14,17 @@ class LayoutSelectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $layouts = Layout::latest();
+        $user = \Auth::user();
+        $user_id = $user->id;
+
+        $layouts = Layout::get();
+        $images = Image::get()->where('user_id', $user_id);
         return view('users.layout_select', [
-            'layouts' => $layouts
+            'layouts' => $layouts,
+            'user_id' => $user_id,
+            'images' => $images
         ]);
 
                 
@@ -29,9 +35,26 @@ class LayoutSelectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $layout_id)
     {
-        //
+        $layout = Layout::get()->where('layout_id', $layout_id)->first();
+        
+        $images_count = $layout->images_count;
+
+        if(is_null($layout_id))
+            return with('error', 'Выберите шаблон');
+
+        $user = \Auth::user();
+        $user_id = $user->id;
+        $images = Image::get()->where('user_id', $user_id);
+
+        return view('users.layout_images_select', [
+            'layout_id' => $layout_id,
+            'images_count' => $images_count,
+            'user_id' => $user_id,
+            'images' => $images
+
+        ]);
     }
 
     /**
