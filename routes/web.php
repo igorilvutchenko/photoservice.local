@@ -15,10 +15,10 @@ Route::resource('user', 'ImageUploadController@store');
 Route::get('/upload', 'ImageUploadController@store');
 // Route::post('/layout_select', 'ImageUploadController@store');
 Route::post('/layout_select', 'LayoutSelectController@index');
-Route::get('{layout_id}/layout_images_select/', 'LayoutSelectController@create');
-Route::post('/layout_config/', 'LayoutConstructController@index');
+Route::get('{layout_id}/layout_images_select', 'LayoutSelectController@create');
+// Route::post('layout_config', 'LayoutConstructController@index');
 // Route::get('/layout_images_select/{layout_id}/{image_id}', 'LayoutSelectController@create');
-// Route::get('/layout_images_select/{layout_id}/{image_id}', 'LayoutConstructController@index');
+Route::post('/layout_config/{layout_id}', 'LayoutConstructController@index');
 // Route::get('/layout_config/{layout_id}/{image_id}', 'LayoutConstructController@index');
 Auth::routes();
 

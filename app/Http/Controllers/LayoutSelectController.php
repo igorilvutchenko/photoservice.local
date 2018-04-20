@@ -47,8 +47,13 @@ class LayoutSelectController extends Controller
         $user = \Auth::user();
         $user_id = $user->id;
         $images = Image::get()->where('user_id', $user_id);
+        foreach ($images as $image) {
+            
+        $image_id = $image->image_id;
+        }
 
         return view('users.layout_images_select', [
+            'image_id' => $image_id,
             'layout_id' => $layout_id,
             'images_count' => $images_count,
             'user_id' => $user_id,
